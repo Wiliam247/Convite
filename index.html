@@ -40,8 +40,9 @@
       width: 90%;
       max-width: 350px;
       opacity: 0;
-      transition: transform 1s ease, opacity 1s ease, width 1s ease, top 1s ease, left 1s ease;
+      transition: transform 1s ease, opacity 1s ease, width 1s ease, top 1s ease, left 1s ease, max-height 1s ease;
       z-index: 1;
+      object-fit: contain;
     }
 
     .container.aberto .convite-img {
@@ -50,9 +51,11 @@
       bottom: auto;
       width: 100vw;
       max-width: none;
+      max-height: 100vh;
       opacity: 1;
       transform: translate(-50%, -50%);
       z-index: 3;
+      object-fit: contain;
     }
   </style>
 </head>
@@ -69,11 +72,8 @@
 
       container.classList.add('aberto');
 
-      // Depois de 1s, faz o envelope sumir com opacidade
       setTimeout(() => {
         envelope.style.opacity = '0';
-
-        // Depois da opacidade sumir, remove do layout
         setTimeout(() => {
           envelope.style.display = 'none';
         }, 700);
@@ -81,4 +81,3 @@
     }
   </script>
 </body>
-</html>
