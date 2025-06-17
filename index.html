@@ -18,51 +18,42 @@
 
     .container {
       position: relative;
-      width: 662px;
-      height: 934px;
+      width: 350px;
+      height: 500px;
       cursor: pointer;
       overflow: visible;
     }
 
-    .envelope-img,
-    .convite-img {
-      width: 662px;
-      height: 934px;
-      object-fit: contain;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      transition: all 1s ease;
-      user-select: none;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-    }
-
     .envelope-img {
-      top: 0;
-      z-index: 2;
-      opacity: 1;
+      width: 100%;
+      height: auto;
       transition: opacity 0.7s ease;
-      position: relative; /* envelope fica no fluxo normal */
-      transform: none; /* sem translateX porque já está centralizado pelo container */
+      position: relative;
+      z-index: 2;
     }
 
     .convite-img {
+      position: absolute;
       bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100%);
+      width: 90%;
+      max-width: 350px;
       opacity: 0;
+      transition: transform 1s ease, opacity 1s ease, width 1s ease, top 1s ease, left 1s ease;
       z-index: 1;
-      transform: translate(-50%, 100%);
     }
 
     .container.aberto .convite-img {
+      top: 50%;
+      left: 50%;
       bottom: auto;
-      top: 0;
+      width: 100vw;
+      max-width: none;
       opacity: 1;
-      transform: translateX(-50%) translateY(0);
+      transform: translate(-50%, -50%);
       z-index: 3;
     }
-
   </style>
 </head>
 <body>
@@ -78,8 +69,11 @@
 
       container.classList.add('aberto');
 
+      // Depois de 1s, faz o envelope sumir com opacidade
       setTimeout(() => {
         envelope.style.opacity = '0';
+
+        // Depois da opacidade sumir, remove do layout
         setTimeout(() => {
           envelope.style.display = 'none';
         }, 700);
