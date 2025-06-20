@@ -1,9 +1,100 @@
-!DOCTYPE html>
-<html lang="pt-br"> <head>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Convite da Sara</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* INÍCIO DO CSS */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f7e7e6; /* Um rosa suave para combinar com as imagens */
+            font-family: sans-serif;
+            overflow: hidden; /* Evita barras de rolagem durante a animação */
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 400px; /* Ajuste conforme necessário */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .envelope-wrapper {
+            position: relative;
+            cursor: pointer;
+            text-align: center;
+            display: block; /* Garante que o clique ocupe a área */
+        }
+
+        .envelope {
+            width: 100%;
+            display: block;
+        }
+
+        .click-text {
+            position: absolute;
+            bottom: 20%; /* Ajuste a posição do texto "Clique para abrir" */
+            left: 50%;
+            transform: translateX(-50%);
+            color: #8B0000; /* Vermelho escuro, similar ao texto nas imagens */
+            font-size: 1.2em;
+            font-weight: bold;
+            pointer-events: none; /* Garante que os cliques passem para o envelope */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            white-space: nowrap; /* Evita que o texto quebre a linha */
+        }
+
+        .invite-wrapper {
+            position: absolute;
+            width: 100%;
+            transform: translateY(100%); /* Começa escondido abaixo do envelope */
+            transition: transform 1s ease-out, opacity 1s ease-out; /* Animação para o convite */
+            opacity: 0; /* Começa invisível */
+            pointer-events: none; /* Impede interação quando escondido */
+        }
+
+        .invite {
+            width: 100%;
+            display: block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Opcional: adiciona uma sombra sutil ao convite */
+        }
+
+        /* Classes de animação */
+        .invite-active .envelope {
+            animation: fadeOutEnvelope 1s forwards;
+        }
+
+        .invite-active .click-text {
+            opacity: 0; /* Esconde o texto de clique */
+            transition: opacity 0.5s;
+        }
+
+        .invite-active .invite-wrapper {
+            transform: translateY(0); /* Move para sua posição natural */
+            opacity: 1; /* Torna-se visível */
+            z-index: 1; /* Traz o convite para a frente */
+        }
+
+        @keyframes fadeOutEnvelope {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.8);
+                pointer-events: none; /* Desativa cliques após desaparecer */
+            }
+        }
+        /* FIM DO CSS */
+    </style>
 </head>
 <body>
     <div class="container">
@@ -11,11 +102,22 @@
             <img src="envelope.png" alt="Envelope" class="envelope" id="envelope">
             <p class="click-text">Clique para abrir</p>
         </div>
-        <div class="invite-wrapper">
+        <div class="invite-wrapper" id="invite-wrapper">
             <img src="convite.png" alt="Convite" class="invite" id="invite">
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        /* INÍCIO DO JAVASCRIPT */
+        document.addEventListener('DOMContentLoaded', () => {
+            const envelope = document.getElementById('envelope');
+            const container = document.querySelector('.container');
+
+            envelope.addEventListener('click', () => {
+                container.classList.add('invite-active');
+            });
+        });
+        /* FIM DO JAVASCRIPT */
+    </script>
 </body>
 </html>
