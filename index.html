@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Convite da Sara</title>
     <style>
-        /* INÍCIO DO CSS */
         body {
             display: flex;
             justify-content: center;
@@ -19,9 +18,8 @@
 
         .container {
             position: relative;
-            /* LARGURA FIXA PARA O SEU CONVITE.PNG (659px) */
             width: 659px;
-            max-width: 100%; /* Permite que diminua em telas menores */
+            max-width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -32,8 +30,8 @@
             cursor: pointer;
             text-align: center;
             display: block;
-            width: 100%; /* Ocupa a largura total do container */
-            z-index: 2; /* Garante que o envelope esteja na frente antes de desaparecer */
+            width: 100%;
+            z-index: 2;
         }
 
         .envelope {
@@ -44,16 +42,14 @@
         .invite-wrapper {
             position: absolute;
             width: 100%;
-            height: 100%; /* Ajusta para a altura total do container */
+            height: 100%;
             top: 0;
             left: 0;
-            transform: translateY(100%); /* Começa escondido abaixo */
+            transform: translateY(100%);
             transition: transform 1s ease-out, opacity 1s ease-out;
             opacity: 0;
-            pointer-events: none; /* Desabilita cliques enquanto está escondido */
-            z-index: 1; /* Convite abaixo do envelope quando escondido */
-
-            /* Garante que o conteúdo (imagem e mapa) se ajuste */
+            pointer-events: none;
+            z-index: 1;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -61,21 +57,20 @@
 
         .invite {
             width: 100%;
-            height: auto; /* Garante que a proporção da imagem seja mantida */
+            height: auto;
             display: block;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        /* Classes de animação */
         .invite-active .envelope {
             animation: fadeOutEnvelope 1s forwards;
         }
 
         .invite-active .invite-wrapper {
-            transform: translateY(0); /* Move para sua posição visível */
-            opacity: 1; /* Torna-se visível */
-            pointer-events: auto; /* Habilita cliques quando visível - CRUCIAL */
-            z-index: 1; /* Traz o convite para a frente */
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 1;
         }
 
         @keyframes fadeOutEnvelope {
@@ -90,16 +85,12 @@
             }
         }
 
-        /* CSS TEMPORÁRIO PARA VER AS ÁREAS CLICÁVEIS - MANTENHA ATÉ FUNCIONAR, DEPOIS REMOVA! */
-        /* Importante: a borda vermelha aparecerá para o mapa de imagem. Se a área clicável ainda estiver invisível,
-           o problema pode ser que a imagem convite.png não está com a mesma resolução de 659x931 que você usou para gerar as coords,
-           ou que o navegador está cacheando algo. */
+        /* Temporário para teste das áreas clicáveis */
         map area {
             border: 2px solid red;
-            opacity: 0.5;
+            opacity: 0.3;
             cursor: pointer;
         }
-        /* FIM DO CSS */
     </style>
 </head>
 <body>
@@ -110,29 +101,14 @@
         <div class="invite-wrapper" id="invite-wrapper">
             <img src="convite.png" usemap="#mymap" alt="Convite" class="invite" id="invite">
 
+            <!-- Um único <map> com todas as áreas -->
             <map name="mymap">
                 <area shape="rect" coords="79,799,544,878"
-                title="Confirmação de Presença" href="https://api.whatsapp.com/send/?phone=553398550233&text&type=phone_number&app_absent=0" target="_blank">
-            </map>
+                    title="Confirmação de Presença" 
+                    href="https://api.whatsapp.com/send/?phone=553398550233&text&type=phone_number&app_absent=0" 
+                    target="_blank">
 
-            <map name="mymap">
                 <area shape="rect" coords="67,675,336,738"
-                title="Local" href="https://www.google.com/maps/place/Clube+Recreativo+Alegria/@-19.9207255,-41.9332502,150m/data=!3m1!1e3!4m6!3m5!1s0xba8b00317071f9:0xd4504140d6abfe20!8m2!3d-19.9206973!4d-41.9329627!16s%2Fg%2F11wxrcy6dw?entry=ttu&g_ep=EgoyMDI1MDYxNy4wIKXMDSoASAFQAw%3D%3D" target="_blank">
-            </map>
-        </div>
-    </div>
+                    title="Local" 
+                    href="https://www.google.com/maps/place/Clube+Recreativo+Alegria/@-19.9207255,-41.9332502,150m/data=!3m1!1e3!4m6!3m5!1s0xba8b00317071f9:0xd4504140d6abf
 
-    <script>
-        /* INÍCIO DO JAVASCRIPT */
-        document.addEventListener('DOMContentLoaded', () => {
-            const envelope = document.getElementById('envelope');
-            const container = document.querySelector('.container');
-
-            envelope.addEventListener('click', () => {
-                container.classList.add('invite-active');
-            });
-        });
-        /* FIM DO JAVASCRIPT */
-    </script>
-</body>
-</html>
