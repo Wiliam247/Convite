@@ -21,7 +21,7 @@
             position: relative;
             /* LARGURA FIXA COM BASE NO SEU CONVITE.PNG (659px) */
             width: 659px;
-            max-width: 100%; /* Permite que diminua em telas menores, mas a precisão do mapa pode ser afetada */
+            max-width: 100%; /* Permite que diminua em telas menores */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -32,6 +32,7 @@
             cursor: pointer;
             text-align: center;
             display: block;
+            width: 100%; /* Ocupa a largura total do container */
             z-index: 2; /* Acima do convite quando fechado */
         }
 
@@ -43,7 +44,7 @@
         .invite-wrapper {
             position: absolute;
             width: 100%;
-            height: 100%;
+            height: 100%; /* Ajusta para a altura total do container */
             top: 0;
             left: 0;
             transform: translateY(100%); /* Começa escondido abaixo */
@@ -52,19 +53,17 @@
             pointer-events: none; /* Desabilita cliques enquanto está escondido */
             z-index: 1; /* Convite abaixo do envelope quando escondido */
 
-            /* NOVO: ESSES SÃO OS AJUSTES IMPORTANTES */
-            display: flex; /* Para centralizar o conteúdo, se necessário */
+            /* Garante que o conteúdo (imagem e mapa) se ajuste */
+            display: flex;
             justify-content: center;
             align-items: center;
         }
 
         .invite {
-            /* Removendo height: 100%; aqui para ver se o mapa funciona melhor com auto */
             width: 100%;
+            height: auto; /* Garante que a proporção da imagem seja mantida */
             display: block;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            /* Importante: a imagem do convite e o mapa devem ter o mesmo tamanho efetivo. */
-            /* Certifique-se de que a imagem convite.png tem a largura 659px */
         }
 
         /* Classes de animação */
@@ -76,7 +75,7 @@
             transform: translateY(0); /* Move para sua posição visível */
             opacity: 1; /* Torna-se visível */
             pointer-events: auto; /* Habilita cliques quando visível - CRUCIAL */
-            z-index: 1; /* Traz o convite para a frente do corpo */
+            z-index: 1; /* Traz o convite para a frente */
         }
 
         @keyframes fadeOutEnvelope {
@@ -91,7 +90,7 @@
             }
         }
 
-        /* CSS TEMPORÁRIO PARA VER AS ÁREAS CLICÁVEIS - MANTENHA ATÉ FUNCIONAR */
+        /* CSS TEMPORÁRIO PARA VER AS ÁREAS CLICÁVEIS - REMOVA ISSO DEPOIS QUE TUDO FUNCIONAR */
         map area {
             border: 2px solid red;
             opacity: 0.5;
@@ -106,11 +105,14 @@
             <img src="envelope.png" alt="Envelope" class="envelope" id="envelope">
         </div>
         <div class="invite-wrapper" id="invite-wrapper">
-            <img src="convite.png" usemap="#image-map" alt="Convite" class="invite" id="invite">
+            <img src="convite.png" usemap="#mymap" alt="Convite" class="invite" id="invite">
 
-            <map name="image-map">
-                <area target="_blank" alt="Local do Evento" title="Local do Evento" href="https://www.google.com/maps/place/Clube+Recreativo+Alegria/@-19.9207255,-41.9332502,150m/data=!3m1!1e3!4m6!3m5!1s0xba8b00317071f9:0xd4504140d6abfe20!8m2!3d-19.9206973!4d-41.9329627!16s%2Fg%2F11wxrcy6dw?entry=ttu&g_ep=EgoyMDI1MDYxNy4wIKXMDSoASAFQAw%3D%3D" coords="67,675,336,7380" shape="rect">
-                <area target="_blank" alt="Confirmar Presença" title="Confirmar Presença" href="https://api.whatsapp.com/send/?phone=553398550233&text&type=phone_number&app_absent=0" coords="79,799,544,878" shape="rect">
+            <map name="mymap">
+                <area shape="rect" coords="79,799,544,878"
+                title="Confirmação de Presença" href="https://api.whatsapp.com/send/?phone=553398550233&text&type=phone_number&app_absent=0" target="_blank">
+
+                <area shape="rect" coords="67,675,336,738"
+                title="Local" href="https://www.google.com/maps/place/Clube+Recreativo+Alegria/@-19.9207255,-41.9332502,150m/data=!3m1!1e3!4m6!3m5!1s0xba8b00317071f9:0xd4504140d6abfe20!8m2!3d-19.9206973!4d-41.9329627!16s%2Fg%2F11wxrcy6dw?entry=ttu&g_ep=EgoyMDI1MDYxNy4wIKXMDSoASAFQAw%3D%3D" target="_blank">
             </map>
         </div>
     </div>
