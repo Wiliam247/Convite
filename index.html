@@ -12,15 +12,15 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            background-color: #f7e7e6;
+            background-color: #f7e7e6; /* Um rosa suave para combinar com as imagens */
             font-family: sans-serif;
-            overflow: hidden;
+            overflow: hidden; /* Evita barras de rolagem durante a animação */
         }
 
         .container {
             position: relative;
             width: 100%;
-            max-width: 400px;
+            max-width: 400px; /* Ajuste conforme necessário */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -30,7 +30,7 @@
             position: relative;
             cursor: pointer;
             text-align: center;
-            display: block;
+            display: block; /* Garante que o clique ocupe a área */
         }
 
         .envelope {
@@ -38,42 +38,22 @@
             display: block;
         }
 
-        .click-text {
-            position: absolute;
-            bottom: 20%;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #8B0000;
-            font-size: 1.2em;
-            font-weight: bold;
-            pointer-events: none;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-            white-space: nowrap;
-        }
+        /* O texto "Clique para abrir" foi removido do HTML, então não precisamos mais do CSS para ele */
+        /* .click-text { ... } */
 
         .invite-wrapper {
             position: absolute;
             width: 100%;
-            transform: translateY(100%);
-            transition: transform 1s ease-out, opacity 1s ease-out;
-            opacity: 0;
-            pointer-events: none;
+            transform: translateY(100%); /* Começa escondido abaixo do envelope */
+            transition: transform 1s ease-out, opacity 1s ease-out; /* Animação para o convite */
+            opacity: 0; /* Começa invisível */
+            pointer-events: none; /* Impede interação quando escondido */
         }
 
         .invite {
             width: 100%;
             display: block;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Animação para girar as bolas de discoteca */
-        @keyframes rotateDiscoBalls {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Opcional: adiciona uma sombra sutil ao convite */
         }
 
         /* Classes de animação */
@@ -81,21 +61,18 @@
             animation: fadeOutEnvelope 1s forwards;
         }
 
-        .invite-active .click-text {
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
+        /* O texto "Clique para abrir" foi removido, então não precisamos mais esconder ele */
+        /* .invite-active .click-text { ... } */
 
         .invite-active .invite-wrapper {
-            transform: translateY(0);
-            opacity: 1;
-            z-index: 1;
+            transform: translateY(0); /* Move para sua posição natural */
+            opacity: 1; /* Torna-se visível */
+            z-index: 1; /* Traz o convite para a frente */
         }
 
-        /* Aplica a animação de rotação ao convite */
-        .invite-active .invite {
-            animation: rotateDiscoBalls 5s linear infinite; /* Rotação infinita em 5 segundos */
-        }
+        /* Removida a animação de rotação para as bolas de discoteca, pois foi solicitado voltar ao código antigo */
+        /* @keyframes rotateDiscoBalls { ... } */
+        /* .invite-active .invite { animation: rotateDiscoBalls ... } */
 
         @keyframes fadeOutEnvelope {
             0% {
@@ -105,7 +82,7 @@
             100% {
                 opacity: 0;
                 transform: scale(0.8);
-                pointer-events: none;
+                pointer-events: none; /* Desativa cliques após desaparecer */
             }
         }
         /* FIM DO CSS */
@@ -115,8 +92,7 @@
     <div class="container">
         <div class="envelope-wrapper">
             <img src="envelope.png" alt="Envelope" class="envelope" id="envelope">
-            <p class="click-text">Clique para abrir</p>
-        </div>
+            </div>
         <div class="invite-wrapper" id="invite-wrapper">
             <img src="convite.png" alt="Convite" class="invite" id="invite">
         </div>
