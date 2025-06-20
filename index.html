@@ -38,6 +38,11 @@
             cursor: pointer;
         }
 
+        /* Faz o envelope parar de capturar cliques após sumir */
+        .container.invite-active .envelope-wrapper {
+            pointer-events: none;
+        }
+
         .invite-wrapper {
             position: absolute;
             width: 100%;
@@ -81,14 +86,13 @@
             100% {
                 opacity: 0;
                 transform: scale(0.8);
-                pointer-events: none;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="envelope-wrapper">
+        <div class="envelope-wrapper" id="envelope-wrapper">
             <img src="envelope.png" alt="Envelope" class="envelope" id="envelope">
         </div>
 
@@ -109,23 +113,4 @@
         </div>
     </div>
 
-    <!-- Image Map Resizer -->
-    <script src="https://unpkg.com/image-map-resizer@1.0.10/js/imageMapResizer.min.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const envelope = document.getElementById('envelope');
-            const container = document.querySelector('.container');
-
-            // Só dispara ao clicar na IMAGEM do envelope
-            envelope.addEventListener('click', () => {
-                container.classList.add('invite-active');
-            });
-
-            // Ajusta o mapa de imagem ao redimensionamento
-            imageMapResize();
-        });
-    </script>
-</body>
-</html>
-
+    <!-- I
