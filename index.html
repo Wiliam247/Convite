@@ -29,7 +29,6 @@
             position: relative;
             cursor: pointer;
             text-align: center;
-            display: block;
             width: 100%;
             z-index: 2;
         }
@@ -39,4 +38,93 @@
             display: block;
         }
 
-        .invite-wra
+        .invite-wrapper {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            transform: translateY(100%);
+            transition: transform 1s ease-out, opacity 1s ease-out;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .invite {
+            width: 100%;
+            height: auto;
+            display: block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .container.invite-active .envelope {
+            animation: fadeOutEnvelope 1s forwards;
+        }
+
+        .container.invite-active .invite-wrapper {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 2;
+        }
+
+        @keyframes fadeOutEnvelope {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.8);
+                pointer-events: none;
+            }
+        }
+
+        /* Teste visual das áreas clicáveis (remova depois se quiser) */
+        map area {
+            border: 2px solid red;
+            opacity: 0.3;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="envelope-wrapper">
+            <img src="envelope.png" alt="Envelope" class="envelope" id="envelope">
+        </div>
+
+        <div class="invite-wrapper" id="invite-wrapper">
+            <!-- A imagem do convite sempre carrega com o map ativo -->
+            <img src="convite.png" usemap="#mymap" alt="Convite" class="invite" id="invite">
+
+            <map name="mymap">
+                <area shape="rect" coords="79,799,544,878"
+                      title="Confirmação de Presença" 
+                      href="https://api.whatsapp.com/send/?phone=553398550233&text&type=phone_number&app_absent=0" 
+                      target="_blank">
+
+                <area shape="rect" coords="67,675,336,738"
+                      title="Local" 
+                      href="https://www.google.com/maps/place/Clube+Recreativo+Alegria/@-19.9207255,-41.9332502,150m/data=!3m1!1e3!4m6!3m5!1s0xba8b00317071f9:0xd4504140d6abfe20!8m2!3d-19.9206973!4d-41.9329627!16s%2Fg%2F11wxrcy6dw?entry=ttu" 
+                      target="_blank">
+            </map>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const envelope = document.getElementById('envelope');
+            const container = document.querySelector('.container');
+
+            envelope.addEventListener('click', () => {
+                container.classList.add('invite-active');
+            });
+        });
+    </script>
+</body>
+</html>
