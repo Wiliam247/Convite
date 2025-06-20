@@ -21,7 +21,7 @@
             position: relative;
             /* LARGURA FIXA COM BASE NO SEU CONVITE.PNG (659px) */
             width: 659px;
-            max-width: 100%; /* Permite que diminua em telas menores, mas as áreas clicáveis podem ficar imprecisas */
+            max-width: 100%; /* Permite que diminua em telas menores, mas a precisão do mapa pode ser afetada */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -32,7 +32,7 @@
             cursor: pointer;
             text-align: center;
             display: block;
-            z-index: 2;
+            z-index: 2; /* Acima do convite quando fechado */
         }
 
         .envelope {
@@ -46,18 +46,25 @@
             height: 100%;
             top: 0;
             left: 0;
-            transform: translateY(100%);
+            transform: translateY(100%); /* Começa escondido abaixo */
             transition: transform 1s ease-out, opacity 1s ease-out;
             opacity: 0;
-            pointer-events: none;
-            z-index: 1;
+            pointer-events: none; /* Desabilita cliques enquanto está escondido */
+            z-index: 1; /* Convite abaixo do envelope quando escondido */
+
+            /* NOVO: ESSES SÃO OS AJUSTES IMPORTANTES */
+            display: flex; /* Para centralizar o conteúdo, se necessário */
+            justify-content: center;
+            align-items: center;
         }
 
         .invite {
+            /* Removendo height: 100%; aqui para ver se o mapa funciona melhor com auto */
             width: 100%;
-            height: 100%;
             display: block;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            /* Importante: a imagem do convite e o mapa devem ter o mesmo tamanho efetivo. */
+            /* Certifique-se de que a imagem convite.png tem a largura 659px */
         }
 
         /* Classes de animação */
@@ -66,10 +73,10 @@
         }
 
         .invite-active .invite-wrapper {
-            transform: translateY(0);
-            opacity: 1;
-            pointer-events: auto;
-            z-index: 1;
+            transform: translateY(0); /* Move para sua posição visível */
+            opacity: 1; /* Torna-se visível */
+            pointer-events: auto; /* Habilita cliques quando visível - CRUCIAL */
+            z-index: 1; /* Traz o convite para a frente do corpo */
         }
 
         @keyframes fadeOutEnvelope {
@@ -84,7 +91,7 @@
             }
         }
 
-        /* CSS TEMPORÁRIO PARA VER AS ÁREAS CLICÁVEIS - REMOVA ISSO DEPOIS QUE TUDO FUNCIONAR */
+        /* CSS TEMPORÁRIO PARA VER AS ÁREAS CLICÁVEIS - MANTENHA ATÉ FUNCIONAR */
         map area {
             border: 2px solid red;
             opacity: 0.5;
