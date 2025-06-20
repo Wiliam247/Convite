@@ -1,0 +1,87 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f7e7e6; /* A soft pink background to match the images */
+    font-family: sans-serif;
+    overflow: hidden; /* Prevent scrollbars during animation */
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 400px; /* Adjust as needed */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.envelope-wrapper {
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+}
+
+.envelope {
+    width: 100%;
+    display: block;
+}
+
+.click-text {
+    position: absolute;
+    bottom: 20%; /* Adjust position of "Clique para abrir" text */
+    left: 50%;
+    transform: translateX(-50%);
+    color: #8B0000; /* Dark red, similar to the text in the images */
+    font-size: 1.2em;
+    font-weight: bold;
+    pointer-events: none; /* Make sure clicks go through to the envelope */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+
+.invite-wrapper {
+    position: absolute;
+    width: 100%;
+    transform: translateY(100%); /* Start hidden below the envelope */
+    transition: transform 1s ease-out; /* Animation for the invite */
+    opacity: 0; /* Start invisible */
+    pointer-events: none; /* Prevent interaction when hidden */
+}
+
+.invite {
+    width: 100%;
+    display: block;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: add a subtle shadow to the invite */
+}
+
+/* Animation classes */
+.invite-active .envelope {
+    animation: fadeOutEnvelope 1s forwards;
+}
+
+.invite-active .click-text {
+    opacity: 0; /* Hide the click text */
+    transition: opacity 0.5s;
+}
+
+.invite-active .invite-wrapper {
+    transform: translateY(0); /* Move to its natural position */
+    opacity: 1; /* Become visible */
+    transition: transform 1s ease-out, opacity 1s ease-out;
+    z-index: 1; /* Bring invite to front */
+}
+
+@keyframes fadeOutEnvelope {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.8);
+        pointer-events: none; /* Disable clicks after fading */
+    }
+}
