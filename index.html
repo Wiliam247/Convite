@@ -19,8 +19,9 @@
 
         .container {
             position: relative;
-            width: 100%;
-            max-width: 400px; /* Largura máxima para o convite */
+            /* LARGURA FIXA AGORA BASEADA NO TAMANHO DA IMAGEM DO CONVITE */
+            width: 659px;
+            max-width: 100%; /* Permite que diminua em telas menores, mas as áreas clicáveis podem ficar fora de lugar */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -31,30 +32,30 @@
             cursor: pointer;
             text-align: center;
             display: block;
-            z-index: 2; /* Acima do convite quando fechado */
+            z-index: 2;
         }
 
         .envelope {
-            width: 100%;
+            width: 100%; /* O envelope vai ter a mesma largura do container */
             display: block;
         }
 
         .invite-wrapper {
             position: absolute;
             width: 100%;
-            height: 100%; /* Garante que o wrapper tenha a altura total da imagem do convite */
-            top: 0; /* Posiciona no topo do container */
-            left: 0; /* Posiciona na esquerda do container */
-            transform: translateY(100%); /* Começa escondido abaixo */
+            height: 100%;
+            top: 0;
+            left: 0;
+            transform: translateY(100%);
             transition: transform 1s ease-out, opacity 1s ease-out;
             opacity: 0;
-            pointer-events: none; /* Desabilita cliques enquanto está escondido */
-            z-index: 1; /* Convite abaixo do envelope quando escondido */
+            pointer-events: none;
+            z-index: 1;
         }
 
         .invite {
-            width: 100%;
-            height: 100%; /* Garante que a imagem do convite ocupe o wrapper */
+            width: 100%; /* A imagem do convite vai ter a mesma largura do container */
+            height: 100%; /* Garante que a imagem preencha o wrapper */
             display: block;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
@@ -65,10 +66,10 @@
         }
 
         .invite-active .invite-wrapper {
-            transform: translateY(0); /* Move para sua posição visível */
-            opacity: 1; /* Torna-se visível */
-            pointer-events: auto; /* Habilita cliques quando visível - CRUCIAL */
-            z-index: 1; /* Traz o convite para a frente do corpo */
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 1;
         }
 
         @keyframes fadeOutEnvelope {
@@ -79,15 +80,15 @@
             100% {
                 opacity: 0;
                 transform: scale(0.8);
-                pointer-events: none; /* Desativa cliques após desaparecer */
+                pointer-events: none;
             }
         }
 
-        /* CSS TEMPORÁRIO PARA VER AS ÁREAS CLICÁVEIS - MANTER ISSO ATÉ FUNCIONAR */
+        /* CSS TEMPORÁRIO PARA VER AS ÁREAS CLICÁVEIS - REMOVA ISSO DEPOIS QUE TUDO FUNCIONAR */
         map area {
-            border: 2px solid red; /* Adiciona uma borda vermelha visível */
-            opacity: 0.5; /* Deixa um pouco transparente para ver o que está por baixo */
-            cursor: pointer; /* Muda o cursor para indicar que é clicável */
+            border: 2px solid red;
+            opacity: 0.5;
+            cursor: pointer;
         }
         /* FIM DO CSS */
     </style>
