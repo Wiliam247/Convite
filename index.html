@@ -19,9 +19,9 @@
 
         .container {
             position: relative;
-            /* LARGURA FIXA AGORA BASEADA NO TAMANHO DA IMAGEM DO CONVITE */
+            /* LARGURA FIXA COM BASE NO SEU CONVITE.PNG (659px) */
             width: 659px;
-            max-width: 100%; /* Permite que diminua em telas menores, mas as áreas clicáveis podem ficar fora de lugar */
+            max-width: 100%; /* Permite que diminua em telas menores, mas as áreas clicáveis podem ficar imprecisas */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -36,7 +36,7 @@
         }
 
         .envelope {
-            width: 100%; /* O envelope vai ter a mesma largura do container */
+            width: 100%;
             display: block;
         }
 
@@ -54,8 +54,8 @@
         }
 
         .invite {
-            width: 100%; /* A imagem do convite vai ter a mesma largura do container */
-            height: 100%; /* Garante que a imagem preencha o wrapper */
+            width: 100%;
+            height: 100%;
             display: block;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
@@ -102,8 +102,8 @@
             <img src="convite.png" usemap="#image-map" alt="Convite" class="invite" id="invite">
 
             <map name="image-map">
-                <area target="_blank" alt="Local do Evento" title="Local do Evento" href="https://www.google.com/maps/place/Clube+Recreativo+Alegria/@-19.9207255,-41.9332502,150m/data=!3m1!1e3!4m6!3m5!1s0xba8b00317071f9:0xd4504140d6abfe20!8m2!3d-19.9206973!4d-41.9329627!16s%2Fg%2F11wxrcy6dw?entry=ttu&g_ep=EgoyMDI1MDYxNy4wIKXMDSoASAFQAw%3D%3D" coords="192,692,333,739" shape="rect">
-                <area target="_blank" alt="Confirmar Presença" title="Confirmar Presença" href="https://api.whatsapp.com/send/?phone=553398550233&text&type=phone_number&app_absent=0" coords="209,879,519,816" shape="rect">
+                <area target="_blank" alt="Local do Evento" title="Local do Evento" href="https://www.google.com/maps/place/Clube+Recreativo+Alegria/@-19.9207255,-41.9332502,150m/data=!3m1!1e3!4m6!3m5!1s0xba8b00317071f9:0xd4504140d6abfe20!8m2!3d-19.9206973!4d-41.9329627!16s%2Fg%2F11wxrcy6dw?entry=ttu&g_ep=EgoyMDI1MDYxNy4wIKXMDSoASAFQAw%3D%3D" coords="344,766,89,670" shape="rect">
+                <area target="_blank" alt="Confirmar Presença" title="Confirmar Presença" href="https://api.whatsapp.com/send/?phone=553398550233&text&type=phone_number&app_absent=0" coords="97,792,510,891" shape="rect">
             </map>
         </div>
     </div>
