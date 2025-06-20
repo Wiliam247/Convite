@@ -1,3 +1,19 @@
+Perfeito! Agora sim temos as coordenadas e os links!
+
+Com base no que você me forneceu:
+
+Local: coords="192,692,333,739" e o link https://www.google.com/maps/place/Clube+Recreativo+Alegria/@-19.9207255,-41.9332502,150m/data=!3m1!1e3!4m6!3m5!1s0xba8b00317071f9:0xd4504140d6abfe20!8m2!3d-19.9206973!4d-41.9329627!16s%2Fg%2F11wxrcy6dw?entry=ttu&g_ep=EgoyMDI1MDYxNy4wIKXMDSoASAFQAw%3D%3D
+Confirmação de Presença: coords="209,879,519,816" (notei que o segundo ponto está invertido para y2,y1, o que é comum e funciona com rect) e o link https://api.whatsapp.com/send/?phone=553398550233&text&type=phone_number&app_absent=0
+Vamos integrar isso ao seu index.html.
+
+Importante:
+
+As coordenadas que você forneceu (192,692,333,739) são em pixels. Para que elas funcionem bem em diferentes tamanhos de tela (responsividade), precisamos que o CSS garanta que a imagem convite.png se redimensione corretamente e que a área de clique se adapte a ela.
+O image-map.net gera um usemap e um <map> que funcionam de forma nativa no HTML. Vamos usar isso e adaptar o CSS para que a imagem do convite, quando exibida, se comporte como o mapa de imagem.
+Aqui está o código index.html atualizado com as áreas clicáveis. Substitua todo o conteúdo do seu index.html por este:
+
+HTML
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -20,7 +36,7 @@
         .container {
             position: relative;
             width: 100%;
-            max-width: 400px; /* Ajuste conforme necessário */
+            max-width: 400px; /* Ajuste conforme necessário - a largura do convite final */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -30,16 +46,15 @@
             position: relative;
             cursor: pointer;
             text-align: center;
-            display: block; /* Garante que o clique ocupe a área */
+            display: block;
+            /* Z-index para garantir que o envelope esteja na frente antes de desaparecer */
+            z-index: 2;
         }
 
         .envelope {
             width: 100%;
             display: block;
         }
-
-        /* O texto "Clique para abrir" foi removido do HTML, então não precisamos mais do CSS para ele */
-        /* .click-text { ... } */
 
         .invite-wrapper {
             position: absolute;
@@ -48,6 +63,7 @@
             transition: transform 1s ease-out, opacity 1s ease-out; /* Animação para o convite */
             opacity: 0; /* Começa invisível */
             pointer-events: none; /* Impede interação quando escondido */
+            z-index: 1; /* Garante que o convite fique abaixo do envelope antes de aparecer */
         }
 
         .invite {
@@ -61,18 +77,12 @@
             animation: fadeOutEnvelope 1s forwards;
         }
 
-        /* O texto "Clique para abrir" foi removido, então não precisamos mais esconder ele */
-        /* .invite-active .click-text { ... } */
-
         .invite-active .invite-wrapper {
             transform: translateY(0); /* Move para sua posição natural */
             opacity: 1; /* Torna-se visível */
-            z-index: 1; /* Traz o convite para a frente */
+            pointer-events: auto; /* Permite cliques nos links do mapa de imagem */
+            z-index: 1; /* Traz o convite (com os links) para a frente */
         }
-
-        /* Removida a animação de rotação para as bolas de discoteca, pois foi solicitado voltar ao código antigo */
-        /* @keyframes rotateDiscoBalls { ... } */
-        /* .invite-active .invite { animation: rotateDiscoBalls ... } */
 
         @keyframes fadeOutEnvelope {
             0% {
@@ -92,9 +102,14 @@
     <div class="container">
         <div class="envelope-wrapper">
             <img src="envelope.png" alt="Envelope" class="envelope" id="envelope">
-            </div>
+        </div>
         <div class="invite-wrapper" id="invite-wrapper">
-            <img src="convite.png" alt="Convite" class="invite" id="invite">
+            <img src="convite.png" usemap="#image-map" alt="Convite" class="invite" id="invite">
+
+            <map name="image-map">
+                <area target="_blank" alt="Local do Evento" title="Local do Evento" href="https://www.google.com/maps/place/Clube+Recreativo+Alegria/@-19.9207255,-41.9332502,150m/data=!3m1!1e3!4m6!3m5!1s0xba8b00317071f9:0xd4504140d6abfe20!8m2!3d-19.9206973!4d-41.9329627!16s%2Fg%2F11wxrcy6dw?entry=ttu&g_ep=EgoyMDI1MDYxNy4wIKXMDSoASAFQAw%3D%3D" coords="192,692,333,739" shape="rect">
+                <area target="_blank" alt="Confirmar Presença" title="Confirmar Presença" href="https://api.whatsapp.com/send/?phone=553398550233&text&type=phone_number&app_absent=0" coords="209,879,519,816" shape="rect">
+            </map>
         </div>
     </div>
 
@@ -110,5 +125,7 @@
         });
         /* FIM DO JAVASCRIPT */
     </script>
+</body>
+</html>
 </body>
 </html>
