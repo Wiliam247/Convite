@@ -113,4 +113,24 @@
         </div>
     </div>
 
-    <!-- I
+    <!-- Image Map Resizer -->
+    <script src="https://unpkg.com/image-map-resizer@1.0.10/js/imageMapResizer.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const envelope = document.getElementById('envelope');
+            const container = document.querySelector('.container');
+
+            envelope.addEventListener('click', () => {
+                container.classList.add('invite-active');
+
+                // Garante que o envelope não vai mais ouvir cliques depois que sumir
+                envelope.style.pointerEvents = 'none';
+            });
+
+            // Ajusta o mapa de imagem ao redimensionamento
+            imageMapResize();
+        });
+    </script>
+</body>
+</htm
